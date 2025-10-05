@@ -17,24 +17,11 @@ Este é um jogo 2D desenvolvido na Unity como parte de um projeto de TCC. O jogo
 
 - **Movimentar**: Teclas A/D ou Setas Esquerda/Direita
 - **Pular**: Tecla Espaço
+- **Daah**: Shift Esquerdo
 
 ## Instalação e Configuração
 
-Para abrir e executar este projeto, você precisará ter o Unity Hub e o Unity Editor instalados (versão utilizada: 2022.3.62f1).
-
-1.  **Clone o repositório:**
-    ```bash
-    git clone https://github.com/Eduuhbruscagim/Projeto-TCC.git
-    ```
-
-2.  **Abra o projeto no Unity Hub:**
-    - Abra o Unity Hub.
-    - Clique em "Add Project" (Adicionar Projeto).
-    - Navegue até a pasta `From the Abyss` dentro do diretório clonado e selecione-a.
-    - O Unity Hub detectará o projeto e o adicionará à sua lista.
-
-3.  **Abra o projeto no Unity Editor:**
-    - No Unity Hub, clique no projeto "From the Abyss" para abri-lo no Unity Editor.
+Para abrir e executar este projeto, acesse o repositório do site ou o meu perfil no GitHub. Lá, você encontrará o link para download do jogo.
 
 ## Estrutura do Projeto
 
@@ -46,7 +33,7 @@ Para abrir e executar este projeto, você precisará ter o Unity Hub e o Unity E
 
 ## Tecnologias Utilizadas
 
-- **Motor de Jogo**: Unity 2022.3.62f1
+- **Motor de Jogo**: Unity 2022.3.62f2
 - **Linguagem de Programação**: C#
 - **Design** : Photoshop, Pixilart, Aseprite, Figma
 
