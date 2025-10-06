@@ -9,10 +9,12 @@ public class ButtonStartFade : MonoBehaviour
     public string nomeDaCenaParaCarregar = "Capitulo 1";
 
     [Header("Transição de Cena")]
-    public Image fadeImage; // arraste a Image preta aqui no Inspector
+    [Tooltip("Caixa de Seleçao dentro da Unity")]
+    public Image fadeImage;
+    [Tooltip("Duração da transição de fade.")]
     public float duracaoFade = 2f;
 
-    // Chamado no OnClick do botão Start
+    // Chamado no evento OnClick do botão Start
     public void IniciarJogo()
     {
         StartCoroutine(TransicaoCena());
@@ -23,11 +25,9 @@ public class ButtonStartFade : MonoBehaviour
         // Fade da música
         MusicaManager musica = FindObjectOfType<MusicaManager>();
         if (musica != null)
-        {
             musica.FadeOutMusica(duracaoFade);
-        }
 
-        // Fade da tela preta
+        // Inicia o fade da tela preta
         float tempo = 0f;
         Color cor = fadeImage.color;
         cor.a = 0f;
@@ -41,7 +41,7 @@ public class ButtonStartFade : MonoBehaviour
             yield return null;
         }
 
-        // Troca de cena
+        // Troca de cena após o término do fade
         SceneManager.LoadScene(nomeDaCenaParaCarregar);
     }
 }

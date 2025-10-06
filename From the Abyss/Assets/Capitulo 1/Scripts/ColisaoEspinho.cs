@@ -28,29 +28,29 @@ public class ColisaoEspinho : MonoBehaviour
             movimentoScript = collision.gameObject.GetComponent<Personagem>();
             rbPersonagem = collision.gameObject.GetComponent<Rigidbody2D>();
 
-            // Desativa o controle do jogador para parar a "briga" de comandos
+            // Desativa o controle do jogador pra evitar bugs
             if (movimentoScript != null)
             {
                 movimentoScript.enabled = false;
             }
 
-            // Para o personagem no lugar, zerando a física (inércia)
+            // Para o personagem no lugar, zerando a física
             if (rbPersonagem != null)
             {
                 rbPersonagem.velocity = Vector2.zero;
                 rbPersonagem.gravityScale = 0; // Congela ele no ar
             }
 
-            // Ativa a animação de morte da forma correta
+            // Ativa a animação de morte
             if (animatorPersonagem != null)
             {
-                // 1. Cancela a ordem de "Pular" que ainda estava ativa
+                // 1. Cancela a animaçao de Pular
                 animatorPersonagem.SetBool("Jump", false);
-                
-                // 2. Agora, com o caminho livre, manda a animação de morte
+
+                // 2. Inicia a animação de morte
                 animatorPersonagem.SetTrigger("Dead");
             }
-            
+
             // Inicia os efeitos visuais e a lógica de morte
             StartCoroutine(FlashScreen());
 
@@ -86,14 +86,14 @@ public class ColisaoEspinho : MonoBehaviour
     {
         yield return new WaitForSeconds(tempoMorte);
 
-        // Move o jogador para o ponto de respawn
+        // Teleporta o jogador para o ponto de respawn
         player.transform.position = SpawnPoint.position;
-        
+
         // Restaura a física do personagem para que ele possa se mover novamente
         if (rbPersonagem != null)
         {
-            // A gravidade padrão no seu script de personagem é 3. Se mudar lá, mude aqui.
-            rbPersonagem.gravityScale = 3f; 
+            // A gravidade padrão no meu script de personagem é 3. Se eu mudar la, tenho que mudar aqui também.
+            rbPersonagem.gravityScale = 3f;
         }
 
         // Garante que o personagem olhe para a direita
@@ -104,15 +104,9 @@ public class ColisaoEspinho : MonoBehaviour
         }
 
         // Reseta o gatilho da animação para que ele possa morrer de novo
-        if(animatorPersonagem != null)
+        if (animatorPersonagem != null)
         {
             animatorPersonagem.ResetTrigger("Dead");
-        }
-        
-        // Reativa o script de movimento para devolver o controle ao jogador
-        if (movimentoScript != null)
-        {
-            movimentoScript.enabled = true;
         }
     }
 }
