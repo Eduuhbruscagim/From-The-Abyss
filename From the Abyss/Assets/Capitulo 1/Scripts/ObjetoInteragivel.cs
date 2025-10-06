@@ -5,19 +5,31 @@ using UnityEngine.UI;
 
 public class ObjetoInteragivel : MonoBehaviour
 {
+    #region Variáveis e Componentes
+
     [Header("Elemento Visual da UI")]
+    [Tooltip("Elemento visual que aparece quando o jogador pode interagir.")]
     public GameObject promptVisual;
 
     [Header("Configuração da Cena")]
+    [Tooltip("Nome da cena que será carregada ao interagir com o objeto.")]
     public string nomeDaCenaParaCarregar;
 
     [Header("Fade")]
-    public Image fadePreto;        // arraste a Image preta aqui
-    public float duracaoFade = 2f; // duração do fade em segundos
+    [Tooltip("Imagem preta usada para o efeito de transição de tela.")]
+    public Image fadePreto;
+
+    [Tooltip("Duração da transição antes de trocar de cena.")]
+    public float duracaoFade = 2f;
 
     private bool jogadorEstaNaArea = false;
     private bool emTransicao = false;
 
+    #endregion
+
+    #region Detecção de Área
+
+    // Detecta quando o jogador entra na área de interação
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -27,6 +39,7 @@ public class ObjetoInteragivel : MonoBehaviour
         }
     }
 
+    // Detecta quando o jogador sai da área de interação
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -36,6 +49,11 @@ public class ObjetoInteragivel : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Lógica de Interação
+
+    // Verifica se o jogador pressiona "F" enquanto está na área de interação
     private void Update()
     {
         if (!emTransicao && jogadorEstaNaArea && Input.GetKeyDown(KeyCode.F))
@@ -44,11 +62,12 @@ public class ObjetoInteragivel : MonoBehaviour
         }
     }
 
+    // Realiza o fade na tela e troca de cena com transição suave
     private IEnumerator FazerFadeECarregarCena()
     {
         emTransicao = true;
 
-        // inicia fade da música se existir MusicaManager
+        // Inicia o fade da música, se o gerenciador de música estiver presente
         MusicaManager mm = FindObjectOfType<MusicaManager>();
         if (mm != null)
         {
@@ -58,6 +77,7 @@ public class ObjetoInteragivel : MonoBehaviour
         float t = 0f;
         Color c = fadePreto.color;
 
+        // Aumenta gradualmente a opacidade da tela preta (fade-in)
         while (t < duracaoFade)
         {
             t += Time.deltaTime;
@@ -66,9 +86,13 @@ public class ObjetoInteragivel : MonoBehaviour
             yield return null;
         }
 
+        // Garante que o fade fique totalmente preto antes de trocar de cena
         c.a = 1f;
         fadePreto.color = c;
 
+        // Carrega a nova cena configurada
         SceneManager.LoadScene(nomeDaCenaParaCarregar);
     }
+
+    #endregion
 }

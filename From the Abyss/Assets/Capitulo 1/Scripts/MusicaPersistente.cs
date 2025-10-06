@@ -4,13 +4,19 @@ using System.Collections;
 
 public class MusicaManager : MonoBehaviour
 {
+    #region Variáveis e Componentes
+
     public AudioClip musicaSplashMenu;
     public AudioClip musicaCapitulo1;
 
     private AudioSource audioSource;
     private static MusicaManager instancia;
 
-    void Awake()
+    #endregion
+
+    #region Ciclo de Vida da Unity
+
+    private void Awake()
     {
         if (instancia != null)
         {
@@ -24,17 +30,21 @@ public class MusicaManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         audioSource.loop = true;
 
-        // Configura a música certa ao iniciar
+        // Configuro a música ao iniciar dentro da Unity
         DefinirMusica(SceneManager.GetActiveScene().name);
 
         // Continua reagindo a mudanças de cena
         SceneManager.sceneLoaded += OnCenaCarregada;
     }
 
-    void OnDestroy()
+    private void OnDestroy()
     {
         SceneManager.sceneLoaded -= OnCenaCarregada;
     }
+
+    #endregion
+
+    #region Gerenciamento de Música
 
     private void OnCenaCarregada(Scene cena, LoadSceneMode modo)
     {
@@ -57,9 +67,9 @@ public class MusicaManager : MonoBehaviour
                 TrocarMusicaComFade(musicaSplashMenu, 1.5f);
             }
         }
-        else if (nomeCena == "Final") // cena final
+        else if (nomeCena == "Final")
         {
-            FadeOutMusica(5f); // tempo em segundos para sumir o som
+            FadeOutMusica(5f);
         }
     }
 
@@ -74,22 +84,26 @@ public class MusicaManager : MonoBehaviour
         {
             // Fade-out
             float startVolume = audioSource.volume;
+
             for (float t = 0; t < duracao; t += Time.deltaTime)
             {
                 audioSource.volume = Mathf.Lerp(startVolume, 0, t / duracao);
                 yield return null;
             }
+
             audioSource.Stop();
         }
 
         // Troca e dá fade-in
         audioSource.clip = novaMusica;
         audioSource.Play();
+
         for (float t = 0; t < duracao; t += Time.deltaTime)
         {
             audioSource.volume = Mathf.Lerp(0, 1, t / duracao);
             yield return null;
         }
+
         audioSource.volume = 1f;
     }
 
@@ -112,4 +126,6 @@ public class MusicaManager : MonoBehaviour
         audioSource.Stop();
         audioSource.clip = null;
     }
+
+    #endregion
 }

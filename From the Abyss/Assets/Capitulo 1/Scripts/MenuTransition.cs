@@ -4,18 +4,29 @@ using System.Collections;
 
 public class MenuTransition : MonoBehaviour
 {
-    public CanvasGroup CanvasGroup; 
+    #region Variáveis de Transição
+
+    public CanvasGroup CanvasGroup;
     public float fadeDuration = 1.2f;
+
+    #endregion
+
+    #region Métodos Públicos
 
     public void LoadCapitulo1()
     {
-        StartCoroutine(FadeOutAndLoad("Capitulo 1")); // Certifique-se do nome exato da cena
+        StartCoroutine(FadeOutAndLoad("Capitulo 1"));
     }
 
-    IEnumerator FadeOutAndLoad(string sceneName)
+    #endregion
+
+    #region Corrotinas de Transição
+
+    private IEnumerator FadeOutAndLoad(string sceneName)
     {
         float elapsed = 0f;
-        CanvasGroup.interactable = false; 
+
+        CanvasGroup.interactable = false;
         CanvasGroup.blocksRaycasts = false;
 
         float startAlpha = CanvasGroup.alpha;
@@ -31,7 +42,8 @@ public class MenuTransition : MonoBehaviour
 
         CanvasGroup.alpha = endAlpha;
 
-        // Agora usa o parâmetro passado
         SceneManager.LoadScene(sceneName);
     }
+
+    #endregion
 }
