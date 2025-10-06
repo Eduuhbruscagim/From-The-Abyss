@@ -4,30 +4,34 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-
 public class ControladorJogo : MonoBehaviour
 {
+    #region Variáveis e Componentes
+
     public static ControladorJogo Controlador;
     public TextMeshProUGUI TextoMoeda;
-
     public int Moedas;
 
-    void Awake()
+    #endregion
+
+    #region Ciclo de Vida da Unity
+
+    private void Awake()
     {
         if (Controlador == null)
         {
             Controlador = this;
         }
-
         else if (Controlador != this)
         {
             Destroy(gameObject);
         }
     }
 
-    
-    void Update()
+    private void Update()
     {
-        
+
     }
+
+    #endregion
 }
