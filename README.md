@@ -17,7 +17,7 @@ Este é um jogo 2D desenvolvido na Unity como parte de um projeto de TCC. O jogo
 
 - **Movimentar**: Teclas A/D ou Setas Esquerda/Direita
 - **Pular**: Tecla Espaço
-- **Daah**: Shift Esquerdo
+- **Dash**: Shift Esquerdo
 
 ## Instalação e Configuração
 
