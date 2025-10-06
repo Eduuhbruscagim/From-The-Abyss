@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
 public class Personagem : MonoBehaviour
 {
     #region Variáveis e Componentes
@@ -14,25 +12,27 @@ public class Personagem : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private ControladorJogo controladorPersonagem;
 
-    // --- Variáveis Públicas Configuráveis ---
 
+    // --- Variáveis Públicas Configuráveis ---
     [Header("Movimento")]
-    [Tooltip("A velocidade de movimento horizontal do personagem.")]
+    [Tooltip("A velocidade do personagem.")]
     public float Speed = 2f;
-    [Tooltip("A força aplicada no pulo inicial.")]
-    public float JumpForce = 6;
+    [Tooltip("Força do pulo.")]
+    public float JumpForce = 6f;
 
     [Header("Dash")]
-    [Tooltip("A força do impulso do dash.")]
+    [Tooltip("Força do dash.")]
     public float DashForce = 10f;
-    [Tooltip("A duração do dash em segundos.")]
+    [Tooltip("Duração do dash.")]
     public float DashTime = 0.1f;
-    [Tooltip("O tempo de espera (cooldown) entre um dash e outro.")]
+    [Tooltip("Cooldown entre dash.")]
     public float DashCooldown = 1f;
+
 
     // --- Variáveis de Estado Privadas ---
     private bool noChao = true;
-    public bool EstaNoChao { get { return noChao; } }
+    public bool EstaNoChao => noChao;
+
     private bool puloDuplo;
     private bool isDashing = false;
     private float dashTimeLeft;
@@ -42,7 +42,8 @@ public class Personagem : MonoBehaviour
 
     #endregion
 
-    #region Métodos do Ciclo de Vida da Unity
+
+    #region Ciclo de Vida da Unity
 
     private void Start()
     {
@@ -61,7 +62,6 @@ public class Personagem : MonoBehaviour
         // Lê os inputs do jogador a cada frame
         moveInput = Input.GetAxisRaw("Horizontal");
 
-        // Chama as funções que dependem de inputs de frame a frame
         Jump();
         HandleDashInput();
     }
@@ -70,15 +70,11 @@ public class Personagem : MonoBehaviour
     {
         // Funções de física são chamadas no FixedUpdate
         if (!isDashing)
-        {
             MoverPersonagem();
-        }
         else
-        {
             Dash();
-        }
 
-        // Aplica a lógica de pulo com gravidade variável
+        // Aplica a lógica do pulo com gravidade variável referente ao tempo pressionado 
         HandleBetterJump();
     }
 
@@ -86,9 +82,7 @@ public class Personagem : MonoBehaviour
 
     #region Movimentação e Ações
 
-    
-    // Aplica o movimento horizontal ao personagem com base no input.
-    
+    // Movimento do Personagem.
     private void MoverPersonagem()
     {
         rbPersonagem.velocity = new Vector2(moveInput * Speed, rbPersonagem.velocity.y);
@@ -105,9 +99,7 @@ public class Personagem : MonoBehaviour
         }
     }
 
-    
     // Gerencia a lógica do pulo e do pulo duplo.
-    
     private void Jump()
     {
         if (Input.GetButtonDown("Jump"))
@@ -132,9 +124,7 @@ public class Personagem : MonoBehaviour
         }
     }
 
-    
-    // Ouve o input do dash e inicia a ação se as condições forem atendidas.
-    
+    // Puxa o input do dash e inicia os comandos se as condições forem verdadeiras.
     private void HandleDashInput()
     {
         if (Input.GetKeyDown(KeyCode.LeftShift) && Time.time >= lastDashTime + DashCooldown)
@@ -144,17 +134,13 @@ public class Personagem : MonoBehaviour
 
             // Bloqueia o dash para cima
             if (direcaoY > 0)
-            {
                 direcaoY = 0;
-            }
 
             dashDirection = new Vector2(direcaoX, direcaoY).normalized;
 
-            // Cláusula de guarda: se não houver input de direção, não faz nada.
+            // Cláusula de guarda: se não houver input de direção, não faz nada
             if (dashDirection == Vector2.zero)
-            {
                 return;
-            }
 
             isDashing = true;
             dashTimeLeft = DashTime;
@@ -163,9 +149,7 @@ public class Personagem : MonoBehaviour
         }
     }
 
-    
     // Aplica a força do dash enquanto ele estiver ativo.
-    
     private void Dash()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, dashDirection, DashForce * Time.fixedDeltaTime, LayerMask.GetMask("Ground"));
@@ -181,34 +165,27 @@ public class Personagem : MonoBehaviour
         }
     }
 
-    
     // Melhora a sensação do pulo ajustando a gravidade dinamicamente.
-    
     private void HandleBetterJump()
     {
         if (isDashing) return; // Não aplica gravidade extra durante o dash
 
         if (rbPersonagem.velocity.y < 0)
-        {
             rbPersonagem.gravityScale = 2f; // Descendo mais rápido
-        }
         else if (rbPersonagem.velocity.y > 0 && !Input.GetButton("Jump"))
-        {
             rbPersonagem.gravityScale = 4f; // Subindo, mas o jogador soltou o botão
-        }
         else
-        {
             rbPersonagem.gravityScale = 1.8f; // Gravidade padrão
-        }
     }
 
     #endregion
+
 
     #region Colisões e Gatilhos
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // Verifica colisões com o chão para resetar o pulo
+        // Verifica colisões com o chão para resetar o pulo e evitar do Personagem travar em uma animaçao de pulo
         if (collision.gameObject.CompareTag("Ground"))
         {
             personagemAnim.SetBool("Jump", false);
