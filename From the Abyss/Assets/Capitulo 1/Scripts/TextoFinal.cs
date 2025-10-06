@@ -6,31 +6,45 @@ using UnityEngine.UI;
 
 public class TextoFinal : MonoBehaviour
 {
+    #region Referências de UI
+
     [Header("Referências")]
-    public TextMeshProUGUI caixaDeTexto; 
-    public Image imagemNormal; // imagem limpa
-    public Image imagemBlur;   // imagem desfocada
-    public TextMeshProUGUI avisoEnter; // mensagem piscando com fade
-    public Image fadePreto; // imagem preta full screen para fade de cena
+    public TextMeshProUGUI caixaDeTexto;
+    public Image imagemNormal;
+    public Image imagemBlur;
+    public TextMeshProUGUI avisoEnter;
+    public Image fadePreto;
+
+    #endregion
+
+    #region Configurações de Texto e Transições
 
     [Header("Configurações")]
-    [TextArea(3, 10)]
     public string[] frases;
     public float velocidade = 0.05f;
     public float pausaEntreFrases = 2f;
-    public float tempoImagem = 3f; // tempo que a imagem limpa fica antes do fade
-    public float tempoTransicao = 2f; // duração do fade entre normal e blur
-    public float duracaoFadeAviso = 1f; // tempo de fade do aviso
-    public float duracaoFadeCena = 2f; // tempo da transição de cena
+    public float tempoImagem = 3f;
+    public float tempoTransicao = 2f;
+    public float duracaoFadeAviso = 1f;
+    public float duracaoFadeCena = 2f;
 
     [Header("Após o fim do texto")]
     public string nomeCenaMenu = "Menu";
 
+    #endregion
+
+    #region Estado Interno
+
     private bool textoTerminado = false;
+    private Coroutine sequenciaCoroutine;
+
+    #endregion
+
+    #region Inicialização
 
     private void Start()
     {
-        // Inicializa o aviso transparente
+        // Inicializa aviso e fade invisíveis
         if (avisoEnter != null)
         {
             Color c = avisoEnter.color;
@@ -38,7 +52,6 @@ public class TextoFinal : MonoBehaviour
             avisoEnter.color = c;
         }
 
-        // Inicializa a imagem de fade preta transparente
         if (fadePreto != null)
         {
             Color c = fadePreto.color;
@@ -46,29 +59,47 @@ public class TextoFinal : MonoBehaviour
             fadePreto.color = c;
         }
 
-        StartCoroutine(SequenciaFinal());
+        // Inicia a sequência final de imagens e texto
+        sequenciaCoroutine = StartCoroutine(SequenciaFinal());
     }
 
-    void Update()
+    private void Update()
     {
-        if (textoTerminado && Input.GetKeyDown(KeyCode.Return))
+        // Se o jogador apertar Enter, já pula para o texto finalizado
+        if (Input.GetKeyDown(KeyCode.Return))
         {
-            StartCoroutine(TransicaoCena());
+            if (!textoTerminado)
+            {
+                // Para a sequência atual e já mostra o texto finalizado
+                if (sequenciaCoroutine != null)
+                    StopCoroutine(sequenciaCoroutine);
+
+                MostrarTextoFinalizado();
+            }
+            else
+            {
+                // Se o texto já terminou, inicia a transição de cena
+                StartCoroutine(TransicaoCena());
+            }
         }
     }
 
-    IEnumerator SequenciaFinal()
+    #endregion
+
+    #region Sequência de Texto e Imagem
+
+    private IEnumerator SequenciaFinal()
     {
-        // estado inicial
+        // Estado inicial
         caixaDeTexto.text = "";
         SetAlpha(imagemNormal, 1f);
         SetAlpha(imagemBlur, 0f);
 
-        // espera com a imagem limpa
+        // Mantém a imagem normal visível
         yield return new WaitForSeconds(tempoImagem);
 
-        // fade para blur
-        float t = 0;
+        // Fade da imagem normal para blur
+        float t = 0f;
         while (t < tempoTransicao)
         {
             t += Time.deltaTime;
@@ -78,7 +109,7 @@ public class TextoFinal : MonoBehaviour
             yield return null;
         }
 
-        // texto letra por letra
+        // Texto letra por letra
         foreach (string frase in frases)
         {
             caixaDeTexto.text = "";
@@ -90,24 +121,45 @@ public class TextoFinal : MonoBehaviour
             yield return new WaitForSeconds(pausaEntreFrases);
         }
 
-        // termina texto e inicia fade do aviso
+        // Texto finalizado e inicia aviso piscante
         textoTerminado = true;
         if (avisoEnter != null)
             StartCoroutine(FadeAvisoLoop());
     }
 
-    IEnumerator FadeAvisoLoop()
+    #endregion
+
+    #region Mostrar Texto Imediatamente
+
+    private void MostrarTextoFinalizado()
+    {
+        // Mostra todas as frases de uma vez
+        caixaDeTexto.text = string.Join("\n", frases);
+
+        // Deixa imagem normal invisível e blur totalmente visível
+        SetAlpha(imagemNormal, 0f);
+        SetAlpha(imagemBlur, 1f);
+
+        // Marca como texto terminado e inicia aviso piscante
+        textoTerminado = true;
+        if (avisoEnter != null)
+            StartCoroutine(FadeAvisoLoop());
+    }
+
+    #endregion
+
+    #region Aviso Piscante
+
+    private IEnumerator FadeAvisoLoop()
     {
         while (true)
         {
-            // fade in
-            yield return StartCoroutine(FadeAviso(0f, 1f));
-            // fade out
-            yield return StartCoroutine(FadeAviso(1f, 0f));
+            yield return StartCoroutine(FadeAviso(0f, 1f)); // fade in
+            yield return StartCoroutine(FadeAviso(1f, 0f)); // fade out
         }
     }
 
-    IEnumerator FadeAviso(float startAlpha, float endAlpha)
+    private IEnumerator FadeAviso(float startAlpha, float endAlpha)
     {
         float t = 0f;
         Color c = avisoEnter.color;
@@ -125,14 +177,19 @@ public class TextoFinal : MonoBehaviour
         avisoEnter.color = c;
     }
 
-    IEnumerator TransicaoCena()
+    #endregion
+
+    #region Transição de Cena
+
+    private IEnumerator TransicaoCena()
     {
-        // bloqueia múltiplos triggers
+        // Bloqueia múltiplos triggers
         textoTerminado = false;
 
         float t = 0f;
         Color c = fadePreto.color;
 
+        // Fade para preto
         while (t < duracaoFadeCena)
         {
             t += Time.deltaTime;
@@ -144,13 +201,20 @@ public class TextoFinal : MonoBehaviour
         c.a = 1f;
         fadePreto.color = c;
 
+        // Carrega a cena do menu
         SceneManager.LoadScene(nomeCenaMenu);
     }
 
-    void SetAlpha(Image img, float alpha)
+    #endregion
+
+    #region Funções Auxiliares
+
+    private void SetAlpha(Image img, float alpha)
     {
         Color c = img.color;
         c.a = alpha;
         img.color = c;
     }
+
+    #endregion
 }
