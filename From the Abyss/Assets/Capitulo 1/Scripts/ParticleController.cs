@@ -5,28 +5,48 @@ using UnityEngine;
 
 public class ParticleController : MonoBehaviour
 {
-    [SerializeField] ParticleSystem DustTrail;
-    [Range(0, 10)]
-    [SerializeField] int occurAfterVelocity;
-    [Range(0, 0.2f)]
-    [SerializeField] float dustFormatioPeriod;
+    #region Configurações de Partículas
 
-    [SerializeField] Rigidbody2D rbPersonagem;
-    [SerializeField] Personagem personagem; // referência direta ao script Personagem
+    [Header("Sistema de Partículas")]
+    [Tooltip("Particle System usado para o efeito de poeira.")]
+    [SerializeField] private ParticleSystem DustTrail;
 
-    float Counter;
+    [Header("Configurações de Movimento")]
+    [Tooltip("Velocidade mínima do personagem para ativar as partículas.")]
+    [SerializeField] private int occurAfterVelocity;
+
+    [Tooltip("Intervalo mínimo entre cada emissão de partículas.")]
+    [SerializeField] private float dustFormatioPeriod;
+
+    [Header("Referências")]
+    [Tooltip("Rigidbody2D do personagem para verificar velocidade.")]
+    [SerializeField] private Rigidbody2D rbPersonagem;
+
+    [Tooltip("Referência ao script Personagem para verificar se está no chão.")]
+    [SerializeField] private Personagem personagem;
+
+    private float counter;
+
+    #endregion
+    
+
+    #region Atualização
 
     private void Update()
     {
-        Counter += Time.deltaTime;
+        counter += Time.deltaTime;
 
+        // Se o personagem está no chão e se move acima da velocidade mínima
         if (personagem.EstaNoChao && Mathf.Abs(rbPersonagem.velocity.x) > occurAfterVelocity)
         {
-            if (Counter > dustFormatioPeriod)
+            // Se já passou o tempo de intervalo, emite partículas
+            if (counter > dustFormatioPeriod)
             {
                 DustTrail.Play();
-                Counter = 0;
+                counter = 0f;
             }
         }
     }
+
+    #endregion
 }
