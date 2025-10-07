@@ -21,7 +21,7 @@ Este é um jogo 2D desenvolvido na Unity como parte de um projeto de TCC. O jogo
 
 ## Instalação e Configuração
 
-Para abrir e executar este projeto, acesse o repositório do site ou o meu perfil no GitHub. Lá, você encontrará o link para download do jogo.
+Para abrir e executar este projeto, acesse o repositório do site ou o meu perfil no GitHub. Lá, você encontrará o link do site e poderá baixar o jogo.
 
 ## Estrutura do Projeto
 
