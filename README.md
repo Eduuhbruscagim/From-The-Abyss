@@ -16,7 +16,7 @@ O gameplay foi construído focando na responsividade dos controles (Input System
 
 * **Sistema de Movimentação:** Controle horizontal com inércia ajustada.
 * **Pulo e Pulo Duplo:** Lógica de detecção de solo (Ground Check) para permitir ou bloquear saltos aéreos.
-* **Dash:** Habilidade de impulso rápido para esquiva e travessia de obstaculos.
+* **Dash:** Habilidade de impulso rápido para esquiva e travessia de obstáculos.
 * **Coleta de Itens:** Sistema de moedas com feedback visual.
 * **Gestão de Cenas:** Transições suaves entre Menu, Fases e Telas de Fim de Jogo.
 
