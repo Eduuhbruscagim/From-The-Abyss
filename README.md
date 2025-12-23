@@ -34,12 +34,6 @@ Você pode baixar a versão compilada para Windows através do link abaixo:
 
 👉 **https://from-the-abyss.vercel.app/**
 
-### Opção 2: Executar o Projeto (Para Devs)
-1.  Clone este repositório.
-2.  Abra o **Unity Hub** e adicione a pasta do projeto.
-3.  Certifique-se de ter a versão **2022.3.62f2** instalada.
-4.  Abra a cena `Assets/Scenes/Menu.unity` e dê Play.
-
 ## 🕹️ Controles
 
 | Ação | Teclado |
