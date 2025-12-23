@@ -1,43 +1,64 @@
-# From the Abyss
+# 🌑 From the Abyss
 
-## Descrição do Projeto
+![Banner do Jogo](https://placehold.co/600x200?text=Screenshot+do+Jogo)
 
-Este é um jogo 2D desenvolvido na Unity como parte de um projeto de TCC. O jogo apresenta mecânicas de plataforma e coleta de itens.
+> **Status:** Concluído (Projeto de TCC) | **Engine:** Unity 2022.3.62f2
 
-## Funcionalidades
+## 📜 Sobre o Projeto
 
-- Movimentação do personagem
-- Pulo e pulo duplo
-- Coleta de moedas
-- Dash
-- Detecção de colisão com obstáculos
-- Transições de cenas
+**From the Abyss** é um jogo de plataforma 2D desenvolvido como Trabalho de Conclusão de Curso (TCC). O projeto explora mecânicas clássicas de precisão e coleta, implementadas na **Unity Engine** com foco em fluidez de movimentação e estruturação de sistemas em C#.
 
-## Como Jogar
+O jogador controla um protagonista que deve superar obstáculos verticais e inimigos, utilizando habilidades progressivas para avançar entre as fases.
 
-- **Movimentar**: Teclas A/D ou Setas Esquerda/Direita
-- **Pular**: Tecla Espaço
-- **Dash**: Shift Esquerdo
+## 🎮 Mecânicas e Funcionalidades
 
-## Instalação e Configuração
+O gameplay foi construído focando na responsividade dos controles (Input System):
 
-Para abrir e executar este projeto, acesse o repositório do site ou o meu perfil no GitHub. Lá, você encontrará o link do site e poderá baixar o jogo.
+* **Sistema de Movimentação:** Controle horizontal com inércia ajustada.
+* **Pulo e Pulo Duplo:** Lógica de detecção de solo (Ground Check) para permitir ou bloquear saltos aéreos.
+* **Dash:** Habilidade de impulso rápido para esquiva e travessia de abismos.
+* **Coleta de Itens:** Sistema de moedas com feedback visual e sonoro.
+* **Gestão de Cenas:** Transições suaves entre Menu, Fases e Telas de Fim de Jogo.
 
-## Estrutura do Projeto
+## 🛠️ Tecnologias e Ferramentas
 
-- `Assets/Scenes`: Contém as cenas do jogo (Menu, Fase 1, Splash).
-- `Assets/Scripts`: Contém todos os scripts C# para a lógica do jogo (movimentação do personagem, controle de jogo, etc.).
-- `Assets/Prefabs`: Contém objetos reutilizáveis do jogo.
-- `Assets/Animations`: Contém as animações dos personagens e objetos.
-- `Assets/Sprites`: Contém os recursos visuais do jogo.
+* **Motor Gráfico:** Unity 2022.3.62f2 (LTS)
+* **Linguagem:** C#
+* **Design & Arte:** Photoshop, Pixilart, Aseprite, Figma
+* **Versionamento:** Git
 
-## Tecnologias Utilizadas
+## 🚀 Como Jogar (Instalação)
 
-- **Motor de Jogo**: Unity 2022.3.62f2
-- **Linguagem de Programação**: C#
-- **Design** : Photoshop, Pixilart, Aseprite, Figma
+### Opção 1: Jogar a Build (Recomendado)
+Você pode baixar a versão compilada para Windows ou jogar diretamente no navegador através do link abaixo:
 
+👉 **[⚠️ INSIRA AQUI O LINK DO ITCH.IO OU SITE]**
 
-## Autor
+### Opção 2: Executar o Projeto (Para Devs)
+1.  Clone este repositório.
+2.  Abra o **Unity Hub** e adicione a pasta do projeto.
+3.  Certifique-se de ter a versão **2022.3.62f2** instalada.
+4.  Abra a cena `Assets/Scenes/Menu.unity` e dê Play.
 
-- Eduardo Guilherme Bruscagim
+## 🕹️ Controles
+
+| Ação | Teclado |
+| :--- | :--- |
+| **Mover** | `A` / `D` ou `Setas` |
+| **Pular** | `Espaço` (Pressione 2x para Pulo Duplo) |
+| **Dash** | `Shift Esquerdo` |
+
+## 🗂 Estrutura do Projeto
+
+* `Assets/Scripts`: Lógica principal (PlayerController, GameManager, UI).
+* `Assets/Scenes`: Fluxo do jogo (Menu, Fase 1, Splash).
+* `Assets/Prefabs`: Objetos instanciáveis (Moedas, Inimigos, Player).
+* `Assets/Animations`: Controladores de animação (Animator).
+
+## 👨‍💻 Autor
+
+**Eduardo Guilherme Bruscagim**
+* [LinkedIn](https://www.linkedin.com/in/eduardo-guilherme-bruscagim-8051a3233/) * [GitHub](https://github.com/Eduardo-Bruscagim)
+
+---
+*Desenvolvido para fins acadêmicos e aprimoramento em desenvolvimento de jogos.*
