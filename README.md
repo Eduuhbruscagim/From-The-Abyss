@@ -1,6 +1,6 @@
 # 🌑 From the Abyss
 
-![Banner do Jogo](https://placehold.co/600x200?text=Screenshot+do+Jogo)
+![Menu Principal](Screenshot%20Menu.jpg)
 
 > **Status:** Concluído (Projeto de TCC) | **Engine:** Unity 2022.3.62f2
 
