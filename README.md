@@ -38,8 +38,8 @@ Você pode baixar a versão compilada para Windows através do link abaixo:
 
 | Ação | Teclado |
 | :--- | :--- |
-| **Mover** | / `W` `A` / `S` / `D` ou `Setas` |
-| **Pular** | `Espaço` (Pressione 2x para Pulo Duplo) |
+| **Mover** | `W` / `A` / `S` / `D` ou `Setas` |
+| **Pular** | `Espaço` (Pressione 2x para Pulo Duplo ou pressione por mais tempo para pular mais alto) |
 | **Dash** | `Shift Esquerdo` |
 
 ## 🗂 Estrutura do Projeto
