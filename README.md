@@ -52,7 +52,7 @@ Você pode baixar a versão compilada para Windows através do link abaixo:
 ## 👨‍💻 Autor
 
 **Eduardo Guilherme Bruscagim**
-* [LinkedIn](https://www.linkedin.com/in/eduardo-guilherme-bruscagim-8051a3233/) * [GitHub](https://github.com/Eduardo-Bruscagim)
+* [GitHub](https://github.com/Eduuhbruscagim)
 
 ---
 *Desenvolvido para fins acadêmicos e aprimoramento em desenvolvimento de jogos.*
