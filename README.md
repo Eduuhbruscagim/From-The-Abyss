@@ -32,7 +32,7 @@ O gameplay foi construído focando na responsividade dos controles (Input System
 ### Opção 1: Jogar a Build (Recomendado)
 Você pode baixar a versão compilada para Windows através do link abaixo:
 
-👉 **[⚠️ https://from-the-abyss.vercel.app/]**
+👉 **https://from-the-abyss.vercel.app/**
 
 ### Opção 2: Executar o Projeto (Para Devs)
 1.  Clone este repositório.
