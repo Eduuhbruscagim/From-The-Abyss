@@ -16,8 +16,8 @@ O gameplay foi construído focando na responsividade dos controles (Input System
 
 * **Sistema de Movimentação:** Controle horizontal com inércia ajustada.
 * **Pulo e Pulo Duplo:** Lógica de detecção de solo (Ground Check) para permitir ou bloquear saltos aéreos.
-* **Dash:** Habilidade de impulso rápido para esquiva e travessia de abismos.
-* **Coleta de Itens:** Sistema de moedas com feedback visual e sonoro.
+* **Dash:** Habilidade de impulso rápido para esquiva e travessia de obstaculos.
+* **Coleta de Itens:** Sistema de moedas com feedback visual.
 * **Gestão de Cenas:** Transições suaves entre Menu, Fases e Telas de Fim de Jogo.
 
 ## 🛠️ Tecnologias e Ferramentas
@@ -30,9 +30,9 @@ O gameplay foi construído focando na responsividade dos controles (Input System
 ## 🚀 Como Jogar (Instalação)
 
 ### Opção 1: Jogar a Build (Recomendado)
-Você pode baixar a versão compilada para Windows ou jogar diretamente no navegador através do link abaixo:
+Você pode baixar a versão compilada para Windows através do link abaixo:
 
-👉 **[⚠️ INSIRA AQUI O LINK DO ITCH.IO OU SITE]**
+👉 **[⚠️ https://from-the-abyss.vercel.app/]**
 
 ### Opção 2: Executar o Projeto (Para Devs)
 1.  Clone este repositório.
