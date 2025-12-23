@@ -46,7 +46,7 @@ Você pode baixar a versão compilada para Windows através do link abaixo:
 
 * `Assets/Scripts`: Lógica principal (PlayerController, GameManager, UI).
 * `Assets/Scenes`: Fluxo do jogo (Menu, Fase 1, Splash).
-* `Assets/Prefabs`: Objetos instanciáveis (Moedas, Inimigos, Player).
+* `Assets/Prefabs`: Objetos instanciáveis (Moedas, Obstáculos, Player).
 * `Assets/Animations`: Controladores de animação (Animator).
 
 ## 👨‍💻 Autor
